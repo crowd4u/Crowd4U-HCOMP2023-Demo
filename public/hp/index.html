@@ -1,0 +1,33 @@
+<head>
+    <title>Crowd4U Demonstrations on HCOMP2023</title>
+</head>
+<body>
+<h2>Scenario 1: Title Matching of Movies of Harry Potter Series</h2>
+<h3>Rules</h3>
+<textarea id="rules">
+Match()
+</textarea>
+<label for="rules">rules of tasks</label>
+<form>
+    <input type="submit" value="Submit">
+</form>
+
+<div hidden="hidden">
+    <!--    url for N4U task -->
+    <ul>
+        <li>
+            <a href="/hp/n4u">N4U Task</a>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    // When submit button is clicked, show the hidden div
+    $(document).ready(function () {
+        $("form").submit(function () {
+            $("div").show();
+        });
+    });
+</script>
+
+</body>
