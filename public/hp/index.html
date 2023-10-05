@@ -5,28 +5,62 @@
 </head>
 <body>
 <h2>Scenario 1: Title Matching of Movies of Harry Potter Series</h2>
-<h3>Rules</h3>
-<label for="rules">rules of tasks</label>
+<h3>Rules written im CyLog+</h3>
+<label for="rules">Rules</label>
 <div>
-    <textarea id="rules">Match()</textarea>
+<textarea id="rules" rows="10" cols="50" readonly>
+Movie("Harry Potter and the Philosopher's Stone");
+Movie("Harry Potter and the Chamber of Secrets");
+Movie("HP & PS");
+Movie("HP & CS");
+Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;
+F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
+</textarea>
 </div>
 <div>
-<button onclick="showHiddenItem()">Submit</button>
+<button onclick="showHiddenItem()">Convert to Logic</button>
 </div>
     <div id="n4u_task" style="display: none;">
-    <!--    url for N4U task -->
-    <ul>
+        <h3>Procedure in Logic Processor</h3>
+    <ol>
         <li>
-            <a href="/hp/n4u">N4U Task</a>
+            <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a>
         </li>
-    </ul>
+        <li style="display: none;">
+            <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a>
+        </li>
+        <li style="display: none;">
+            <a>Fix inconsistencies with Human Task below:</a>
+            <p><iframe src="" width="800" height="600"></iframe></p>
+        </li>
+    </ol>
+        <button id="logic_proceeding" onclick="showNextItem()">Go to the next step</button>
     </div>
 
 <script type="text/javascript">
-    // When submit button is clicked, show the hidden div
     function showHiddenItem() {
-        var hiddenItem = document.getElementById('n4u_task');
+    // set iframe src
+        let wf_id = "";
+        let run_url = "https://next.crowd4u.org/runs/wf/"+wf_id+"/run";
+        let iframe = document.getElementsByTagName('iframe')[0];
+        iframe.src = run_url;
+
+        // When submit button is clicked, show the hidden div
+        let hiddenItem = document.getElementById('n4u_task');
         hiddenItem.style.display = 'block';
+    }
+
+    // showing list items one by one with clicking the button
+    function showNextItem() {
+        let list = document.getElementsByTagName('li');
+        let button = document.getElementById('logic_proceeding');
+        let i = 0;
+        button.onclick = function() {
+            if (i < list.length) {
+                list[i].style.display = 'block';
+                i++;
+            }
+        }
     }
 </script>
 
