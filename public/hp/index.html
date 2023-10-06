@@ -22,18 +22,18 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
 </div>
     <div id="n4u_task" style="display: none;">
         <h3>Procedure in Logic Processor</h3>
-    <ol>
+    <ul>
         <li>
-            <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a>
+            1. <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a>
         </li>
         <li style="display: none;">
-            <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a>
+            2. <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a>
         </li>
         <li style="display: none;">
-            <a>Fix inconsistencies with Human Task below:</a>
+            3. <a>Fix inconsistencies with Human Task below:</a>
             <p><iframe src="" width="800" height="600"></iframe></p>
         </li>
-    </ol>
+    </ul>
         <button id="logic_proceeding" onclick="showNextItem()">Go to the next step</button>
     </div>
 
@@ -53,13 +53,12 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
     // showing list items one by one with clicking the button
     function showNextItem() {
         let list = document.getElementsByTagName('li');
-        let button = document.getElementById('logic_proceeding');
-        let i = 0;
-        button.onclick = function() {
-            if (i < list.length) {
-                list[i].style.display = 'block';
-                i++;
-            }
+        // filter list only style="display: none;"
+        list = Array.prototype.filter.call(list, function (item) {
+            return item.style.display === 'none';
+        });
+        if (list.length !== 0) {
+            list[0].style.display = 'block';
         }
     }
 </script>
