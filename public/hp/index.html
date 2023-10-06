@@ -33,15 +33,22 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
             3. <a>Fix inconsistencies with Human Task below:</a>
             <p><iframe src="" width="800" height="600"></iframe></p>
         </li>
+        <li style="display: none">
+            4. the fixed results:
+            <div id="fixed_results"></div>
+        </li>
     </ul>
         <button id="logic_proceeding" onclick="showNextItem()">Go to the next step</button>
     </div>
 
 <script type="text/javascript">
+    const wf_id = "";
+    const n4u_url = "https://next.crowd4u.org/";
+    const run_url = n4u_url+ "runs/wf/"+wf_id+"/run";
+    const result_dataset_id = "";
+
     function showHiddenItem() {
     // set iframe src
-        let wf_id = "";
-        let run_url = "https://next.crowd4u.org/runs/wf/"+wf_id+"/run";
         let iframe = document.getElementsByTagName('iframe')[0];
         iframe.src = run_url;
 
@@ -57,8 +64,32 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
         list = Array.prototype.filter.call(list, function (item) {
             return item.style.display === 'none';
         });
-        if (list.length !== 0) {
+        if (list.length > 1) {
             list[0].style.display = 'block';
+        }
+        else if (list.length === 1) {
+            list[0].style.display = 'block';
+            let button = document.getElementById('logic_proceeding');
+            button.style.display = 'none';
+            let target_element = document.getElementById('fixed_results');
+            // get the fixed results form n4u API
+            const url = n4u_url+"api/v1/test/datasets/"+result_dataset_id;
+            target_element.innerHTML = "Loading...";
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let results = data.data;
+                    let html = "<table>";
+                    for (let i = 0; i < results.length; i++) {
+                        html += "<tr>";
+                        for (let j = 0; j < results[i].length; j++) {
+                            html += "<td>" + results[i][j] + "</td>";
+                        }
+                        html += "</tr>";
+                    }
+                    html += "</table>";
+                    target_element.innerHTML = html;
+                });
         }
     }
 </script>
