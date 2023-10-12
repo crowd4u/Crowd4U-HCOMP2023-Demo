@@ -18,13 +18,14 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
 </textarea>
 </div>
 <div>
-<button onclick="showHiddenItem()">Convert to Logic</button>
+<button onclick="showHiddenItem()">Convert to Task</button>
 </div>
     <div id="n4u_task" style="display: none;">
         <h3>Procedure in Logic Processor</h3>
     <ul>
         <li>
             1. <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a>
+            <div id="llm_results" onload="getLLMResults()"></div>
         </li>
         <li style="display: none;">
             2. <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a>
@@ -41,57 +42,7 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
         <button id="logic_proceeding" onclick="showNextItem()">Go to the next step</button>
     </div>
 
-<script type="text/javascript">
-    const wf_id = "";
-    const n4u_url = "https://next.crowd4u.org/";
-    const run_url = n4u_url+ "runs/wf/"+wf_id+"/run";
-    const result_dataset_id = "";
-
-    function showHiddenItem() {
-    // set iframe src
-        let iframe = document.getElementsByTagName('iframe')[0];
-        iframe.src = run_url;
-
-        // When submit button is clicked, show the hidden div
-        let hiddenItem = document.getElementById('n4u_task');
-        hiddenItem.style.display = 'block';
-    }
-
-    // showing list items one by one with clicking the button
-    function showNextItem() {
-        let list = document.getElementsByTagName('li');
-        // filter list only style="display: none;"
-        list = Array.prototype.filter.call(list, function (item) {
-            return item.style.display === 'none';
-        });
-        if (list.length > 1) {
-            list[0].style.display = 'block';
-        }
-        else if (list.length === 1) {
-            list[0].style.display = 'block';
-            let button = document.getElementById('logic_proceeding');
-            button.style.display = 'none';
-            let target_element = document.getElementById('fixed_results');
-            // get the fixed results form n4u API
-            const url = n4u_url+"api/v1/test/datasets/"+result_dataset_id;
-            target_element.innerHTML = "Loading...";
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    let results = data.data;
-                    let html = "<table>";
-                    for (let i = 0; i < results.length; i++) {
-                        html += "<tr>";
-                        for (let j = 0; j < results[i].length; j++) {
-                            html += "<td>" + results[i][j] + "</td>";
-                        }
-                        html += "</tr>";
-                    }
-                    html += "</table>";
-                    target_element.innerHTML = html;
-                });
-        }
-    }
+<script type="text/javascript" src="manager.js">
 </script>
 
 </body>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd4U Demonstrations on HCOMP2023</title>
+</head>
+<body>
+<h2>Set Workflow ID and Result Dataset ID for Title Matching Scenario</h2>
+<div>
+    <label for="workflowId">Enter Workflow ID:</label>
+    <input type="text" id="workflowId">
+    <button onclick="updateWorkflowId()">Update</button>
+</div>
+<div>
+    <label for="resultDatasetId">Enter Result Dataset ID:</label>
+    <input type="text" id="resultDatasetId">
+    <button onclick="updateResultDatasetId()">Update</button>
+</div>
+<div>
+    <label for="resultDatasetId">Enter LLM Result Dataset ID:</label>
+    <input type="text" id="LLMResultDatasetId">
+    <button onclick="updateLLMResultDatasetId()">Update</button>
+</div>
+
+<script src="manager.js"></script>
+</body>
+</html>
