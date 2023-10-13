@@ -50,7 +50,7 @@ function updateLLMResultDatasetId() {
 // });
 
 
-const n4u_url = "https://next.crowd4u.org/";
+const n4u_url = "http://localhost:5001/";
 
 function showHiddenItem() {
     // set iframe src
@@ -97,15 +97,17 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
             if (!response.ok) {
                 throw new Error('Network response was not ok: '+response.status);
             }
+            return response.json();
         })
-        .then(response => response.json())
         .then(data => {
-            let results = data.data;
+            data = JSON.parse(data);
+            console.log('Data received:', data);
+            let results = data["dataitems"];
             let html = "<table>";
             for (let i = 0; i < results.length; i++) {
                 html += "<tr>";
-                for (let j = 0; j < results[i].length; j++) {
-                    html += "<td>" + results[i][j] + "</td>";
+                for (let j = 0; j < results[i]["content"].length; j++) {
+                    html += "<td>" + results[i]["content"][j] + "</td>";
                 }
                 html += "</tr>";
             }
