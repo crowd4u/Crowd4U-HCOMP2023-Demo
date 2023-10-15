@@ -6,7 +6,7 @@
 <body>
 <h2>Scenario 1: Title Matching of Movies of Harry Potter Series</h2>
 <h3>Rules written im CyLog+</h3>
-<label for="rules">Rules</label>
+<a href="setid.html">set params</a>
 <div>
 <textarea id="rules" rows="10" cols="50" readonly>
 Movie("Harry Potter and the Philosopher's Stone");
@@ -24,18 +24,19 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
         <h3>Procedure in Logic Processor</h3>
     <ul>
         <li>
-            1. <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a>
-            <div id="llm_results" onload="getLLMResults()"></div>
+            <h4>1. <a>Ask LLM to <code>Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;</code> for each <code>Movie</code></a></h4>
+            <div id="llm_results"></div>
         </li>
         <li style="display: none;">
-            2. <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a>
+            <h4>2. <a>Find inconsistent pairs with <code>F :- Match(x, y), Match(y, z), [ not Match(x, z) ];</code></a></h4>
+            <div id="inconsistent_pairs"></div>
         </li>
         <li style="display: none;">
-            3. <a>Fix inconsistencies with Human Task below:</a>
+            <h4>3. <a>Fix inconsistencies with Human Task below:</a></h4>
             <p><iframe src="" width="800" height="600"></iframe></p>
         </li>
         <li style="display: none">
-            4. the fixed results:
+            <h4>4. the fixed results:</h4>
             <div id="fixed_results"></div>
         </li>
     </ul>
@@ -44,6 +45,32 @@ F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
 
 <script type="text/javascript" src="manager.js">
 </script>
-
 </body>
+<style>
+    table {
+        width: 70%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid black; /* Border for each cell */
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    /* Add vertical borders between columns */
+    th, td {
+        border-right: 1px solid black;
+    }
+
+    /* Add horizontal borders between rows */
+    tr {
+        border-bottom: 1px solid black;
+    }
+</style>
 </html>

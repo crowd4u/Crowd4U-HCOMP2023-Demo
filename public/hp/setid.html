@@ -14,7 +14,7 @@
     <button onclick="updateWorkflowId()">Update</button>
 </div>
 <div>
-    <label for="resultDatasetId">Enter Result Dataset ID:</label>
+    <label for="resultDatasetId">Enter Final Result Dataset ID:</label>
     <input type="text" id="resultDatasetId">
     <button onclick="updateResultDatasetId()">Update</button>
 </div>
@@ -22,6 +22,22 @@
     <label for="LLMResultDatasetId">Enter LLM Result Dataset ID:</label>
     <input type="text" id="LLMResultDatasetId">
     <button onclick="updateLLMResultDatasetId()">Update</button>
+</div>
+<div>
+    <label for="sourceDatasetId">Enter Source Dataset ID:</label>
+    <input type="text" id="sourceDatasetId">
+    <button onclick="updateSourceDatasetId()">Update</button>
+</div>
+<div>
+    <label for="humanDatasetId">Enter Human Dataset ID:</label>
+    <input type="text" id="humanDatasetId">
+    <button onclick="updateHumanDatasetId()">Update</button>
+</div>
+
+<div>
+    <label for="paramsJSONArea">Enter Params JSON:</label>
+    <div><textarea id="paramsJSONArea"></textarea></div>
+    <button onclick="updateParamsByJSON()">Update</button>
 </div>
 
 <script src="manager.js"></script>
