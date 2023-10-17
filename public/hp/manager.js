@@ -45,6 +45,12 @@ function updateHumanDatasetId() {
     alert('Human Dataset ID updated!');
 }
 
+function updateN4UURL() {
+    const n4uURL = document.getElementById('n4uURL').value;
+    setCookie('n4u_url', n4uURL, 1);  // Set the cookie named 'n4u_url' with the input value
+    alert('N4U URL updated!');
+}
+
 function updateParamsByJSON() {
     const params = document.getElementById('paramsJSONArea').value;
 //     load each params above from json params.
@@ -74,11 +80,12 @@ function updateParamsByJSON() {
     alert('Params updated!');
 }
 
-const n4u_url = "http://localhost:5001/";
 
 function showHiddenItem() {
     // set iframe src
     let iframe = document.getElementsByTagName('iframe')[0];
+
+    const n4u_url = getCookie("n4u_url");
 
     let wf_id = getCookie("workflow_id")
     iframe.src = n4u_url+ "runs/wf/"+wf_id+"/run";
@@ -115,6 +122,8 @@ function showNextItem() {
 }
 
 function plotInconsistentPairs(target_element, id_name = "") {
+    const n4u_url = getCookie("n4u_url");
+
     let result_dataset_id = getCookie(id_name);
     // get the fixed results form n4u API
     const baseurl = n4u_url+"api/v1/datasets/";
@@ -146,6 +155,8 @@ function plotInconsistentPairs(target_element, id_name = "") {
 }
 
 function plotTableFromN4UDataset(target_element, id_name = "") {
+    const n4u_url = getCookie("n4u_url");
+
     let result_dataset_id = getCookie(id_name);
     target_element.innerHTML = "Loading...";
     let label_list = getLabels();
@@ -194,6 +205,8 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
 }
 
 function getLabels() {
+    const n4u_url = getCookie("n4u_url");
+
     let source_dataset_id = getCookie("source_dataset_id");
     const baseurl = n4u_url+"api/v1/datasets/";
     let label_list = [];
