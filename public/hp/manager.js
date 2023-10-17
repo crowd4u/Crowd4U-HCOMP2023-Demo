@@ -1,6 +1,6 @@
 let virtual_cookie = {};
 
-function setCookie(name, value, days) {
+function setCookie(name, value) {
     virtual_cookie[name] = value;
 }
 
@@ -10,37 +10,37 @@ function getCookie(name) {
 
 function updateWorkflowId() {
     const workflowId = document.getElementById('workflowId').value;
-    setCookie('workflow_id', workflowId, 1);  // Set the cookie named 'workflow_id' with the input value
+    setCookie('workflow_id', workflowId);  // Set the cookie named 'workflow_id' with the input value
     alert('Workflow ID updated!');
 }
 
 function updateResultDatasetId() {
     const resultDatasetId = document.getElementById('resultDatasetId').value;
-    setCookie('result_dataset_id', resultDatasetId, 1);  // Set the cookie named 'result_dataset_id' with the input value
+    setCookie('result_dataset_id', resultDatasetId);  // Set the cookie named 'result_dataset_id' with the input value
     alert('Result Dataset ID updated!');
 }
 
 function updateLLMResultDatasetId() {
     const resultDatasetId = document.getElementById('LLMResultDatasetId').value;
-    setCookie('llm_dataset_id', resultDatasetId, 1);  // Set the cookie named 'result_dataset_id' with the input value
+    setCookie('llm_dataset_id', resultDatasetId);  // Set the cookie named 'result_dataset_id' with the input value
     alert('LLM Result Dataset ID updated!');
 }
 
 function updateSourceDatasetId() {
     const sourceDatasetId = document.getElementById('sourceDatasetId').value;
-    setCookie('source_dataset_id', sourceDatasetId, 1);  // Set the cookie named 'source_dataset_id' with the input value
+    setCookie('source_dataset_id', sourceDatasetId);  // Set the cookie named 'source_dataset_id' with the input value
     alert('Source Dataset ID updated!');
 }
 
 function updateHumanDatasetId() {
     const humanDatasetId = document.getElementById('humanDatasetId').value;
-    setCookie('human_dataset_id', humanDatasetId, 1);  // Set the cookie named 'human_dataset_id' with the input value
+    setCookie('human_dataset_id', humanDatasetId);  // Set the cookie named 'human_dataset_id' with the input value
     alert('Human Dataset ID updated!');
 }
 
 function updateN4UURL() {
     const n4uURL = document.getElementById('n4uURL').value;
-    setCookie('n4u_url', n4uURL, 1);  // Set the cookie named 'n4u_url' with the input value
+    setCookie('n4u_url', n4uURL);  // Set the cookie named 'n4u_url' with the input value
     alert('N4U URL updated!');
 }
 
@@ -51,23 +51,23 @@ function updateParamsByJSON() {
 //     set each params to cookie. if undefined, ignore.
 
     if (paramsJSON['workflow_id'] !== undefined) {
-        setCookie('workflow_id', paramsJSON['workflow_id'], 1);
+        setCookie('workflow_id', paramsJSON['workflow_id']);
         document.getElementById('workflowId').value = paramsJSON['workflow_id'];
     }
     if (paramsJSON['final_dataset_id'] !== undefined) {
-        setCookie('result_dataset_id', paramsJSON['final_dataset_id'], 1);
+        setCookie('result_dataset_id', paramsJSON['final_dataset_id']);
         document.getElementById('resultDatasetId').value = paramsJSON['final_dataset_id'];
     }
     if (paramsJSON['llm_dataset_id'] !== undefined) {
-        setCookie('llm_dataset_id', paramsJSON['llm_dataset_id'], 1);
+        setCookie('llm_dataset_id', paramsJSON['llm_dataset_id']);
         document.getElementById('LLMResultDatasetId').value = paramsJSON['llm_dataset_id'];
     }
     if (paramsJSON['source_dataset_id'] !== undefined) {
-        setCookie('source_dataset_id', paramsJSON['source_dataset_id'], 1);
+        setCookie('source_dataset_id', paramsJSON['source_dataset_id']);
         document.getElementById('sourceDatasetId').value = paramsJSON['source_dataset_id'];
     }
     if (paramsJSON['human_dataset_id'] !== undefined) {
-        setCookie('human_dataset_id', paramsJSON['human_dataset_id'], 1);
+        setCookie('human_dataset_id', paramsJSON['human_dataset_id']);
         document.getElementById('humanDatasetId').value = paramsJSON['human_dataset_id'];
     }
     alert('Params updated!');
