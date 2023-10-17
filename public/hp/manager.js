@@ -1,18 +1,11 @@
+let virtual_cookie = {};
+
 function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    virtual_cookie[name] = value;
 }
 
 function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].split('=');
-        if (cookie[0] === name) {
-            return decodeURIComponent(cookie[1]);
-        }
-    }
-    return "";
+    return virtual_cookie[name];
 }
 
 function updateWorkflowId() {
@@ -226,4 +219,13 @@ function getLabels() {
             }
         });
     return label_list;
+}
+
+function showSetParamUI() {
+    let hiddenItem = document.getElementById('setParams');
+    if (hiddenItem.style.display === 'block') {
+        hiddenItem.style.display = 'none';
+    } else {
+        hiddenItem.style.display = 'block';
+    }
 }

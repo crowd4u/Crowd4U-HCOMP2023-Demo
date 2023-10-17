@@ -6,7 +6,47 @@
 <body>
 <h2>Scenario 1: Title Matching of Movies of Harry Potter Series</h2>
 <h3>Rules written im CyLog+</h3>
-<a href="setid.html">set params</a>
+<button onclick="showSetParamUI()">set params</button>
+
+<div id="setParams" style="display: none;">
+    <div>
+        <label for="workflowId">Enter Workflow ID:</label>
+        <input type="text" id="workflowId">
+        <button onclick="updateWorkflowId()">Update</button>
+    </div>
+    <div>
+        <label for="resultDatasetId">Enter Final Result Dataset ID:</label>
+        <input type="text" id="resultDatasetId">
+        <button onclick="updateResultDatasetId()">Update</button>
+    </div>
+    <div>
+        <label for="LLMResultDatasetId">Enter LLM Result Dataset ID:</label>
+        <input type="text" id="LLMResultDatasetId">
+        <button onclick="updateLLMResultDatasetId()">Update</button>
+    </div>
+    <div>
+        <label for="sourceDatasetId">Enter Source Dataset ID:</label>
+        <input type="text" id="sourceDatasetId">
+        <button onclick="updateSourceDatasetId()">Update</button>
+    </div>
+    <div>
+        <label for="humanDatasetId">Enter Human Dataset ID:</label>
+        <input type="text" id="humanDatasetId">
+        <button onclick="updateHumanDatasetId()">Update</button>
+    </div>
+
+    <div>
+        <label for="paramsJSONArea">Enter Params JSON:</label>
+        <div><textarea id="paramsJSONArea"></textarea></div>
+        <button onclick="updateParamsByJSON()">Update</button>
+    </div>
+    <div>
+        <label for="n4uURL">Enter N4U URL:</label>
+        <input type="text" id="n4uURL">
+        <button onclick="updateN4UURL()">Update</button>
+    </div>
+</div>
+
 <div>
 <textarea id="rules" rows="10" cols="50" readonly>
 Movie("Harry Potter and the Philosopher's Stone");
