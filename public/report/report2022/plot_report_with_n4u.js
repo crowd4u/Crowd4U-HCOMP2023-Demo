@@ -1,11 +1,11 @@
-// this is the main file for the plot report with n4u
-// Path: public/hp/report/plot_report_with_n4u.js
+// this is the main file for the plot report2022 with n4u
+// Path: public/hp/report2022/plot_report_with_n4u.js
 
-const n4u_url = "http://localhost:5001"
+const n4u_url = "https://next.crowd4u.org"
 const n4u_api_url = n4u_url + "/api/v1"
-const papers_dataset_id = "a7af795a-25b6-49d8-a4df-bb8adba77e7a"
-const clusters_dataset_id = "f8e368b0-3bd8-4d4f-8248-73dd6dc41e4e"
-const description_dataset_id = "b881e485-d4b5-49a9-94e5-c73a37c5f9ff"
+const papers_dataset_id = "b9933a81-717e-40d6-823f-b54602ccf651"
+const clusters_dataset_id = "0bbe7341-4bab-4b11-beae-565a2758e68c"
+const description_dataset_id = "be9fc012-90bd-462e-a60a-e756d5a55fb2"
 
 function get_data_from_n4u(dataset_id) {
     return fetch(n4u_api_url+"/datasets/"+dataset_id)
