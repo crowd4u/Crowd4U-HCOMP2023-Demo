@@ -100,8 +100,9 @@ async function plot_report(){
                     let title = papers[k][1];
                     let doi = papers[k][2];
                     // title with a link to doi
-                    let title_link = document.createElement("a", {href: doi});
+                    let title_link = document.createElement("a");
                     title_link.innerText = title;
+                    title_link.href = doi;
                     paper_title.appendChild(title_link);
                     paper.appendChild(paper_title);
 
