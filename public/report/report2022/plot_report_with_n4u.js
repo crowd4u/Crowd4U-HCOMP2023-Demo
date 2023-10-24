@@ -37,11 +37,11 @@ async function plot_report(){
     }
     console.log("clusters (length:", clusters.length, ")" ,clusters);
 //     insert description
-    let descriptions = []
-    let raw_data = await get_data_from_n4u(description_dataset_id);
-    let desc_json = JSON.parse(raw_data)["dataitems"];
+    let descriptions = [];
+    let raw_desc = await get_data_from_n4u(description_dataset_id);
+    let desc_json = JSON.parse(raw_desc)["dataitems"];
     for (let i = 0; i < desc_json.length; i++) {
-        let desc = JSON.parse(desc_json[i]["content"]);
+        let desc = desc_json[i]["content"];
         descriptions.push(desc);
     }
     console.log("descriptions (length:", descriptions.length, ")", descriptions);
