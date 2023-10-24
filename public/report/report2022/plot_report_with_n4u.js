@@ -28,7 +28,7 @@ async function plot_report(){
                 papers.push(papers_json[i]["content"]);
             }
         });
-    console.log("papers", papers);
+    console.log("papers (length:", papers.length, ")", papers);
 
 //     insert clusters
     let clusters = [];
@@ -39,7 +39,7 @@ async function plot_report(){
                 clusters.push(clusters_json[i]["content"]);
             }
         });
-    console.log("clusters",clusters);
+    console.log("clusters (length:", clusters.length, ")" ,clusters);
 //     insert description
     let descriptions = []
     get_data_from_n4u(description_dataset_id)
@@ -50,7 +50,7 @@ async function plot_report(){
                 descriptions.push(desc);
             }
         });
-    console.log("descriptions", descriptions);
+    console.log("descriptions (length:", descriptions.length, ")", descriptions);
 
     // compose html like below
     /**
