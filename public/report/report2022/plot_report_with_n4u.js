@@ -39,8 +39,9 @@ async function plot_report(){
 //     insert description
     let descriptions = []
     let raw_data = await get_data_from_n4u(description_dataset_id);
-    for (let i = 0; i < raw_data.length; i++) {
-        let desc = JSON.parse(raw_data[i]["content"]);
+    let desc_json = JSON.parse(raw_data)["dataitems"];
+    for (let i = 0; i < desc_json.length; i++) {
+        let desc = JSON.parse(desc_json[i]["content"]);
         descriptions.push(desc);
     }
     console.log("descriptions (length:", descriptions.length, ")", descriptions);
