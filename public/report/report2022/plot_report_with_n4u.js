@@ -21,24 +21,20 @@ async function plot_report(){
     let html = document.getElementById("report");
     //     insert papers
     let papers = [];
-    get_data_from_n4u(papers_dataset_id)
-        .then(data => {
-            let papers_json = JSON.parse(data)["dataitems"];
-            for (let i = 0; i < papers_json.length; i++) {
-                papers.push(papers_json[i]["content"]);
-            }
-        });
+    let papers_raw = await get_data_from_n4u(papers_dataset_id)
+    let papers_json = JSON.parse(papers_raw)["dataitems"];
+    for (let i = 0; i < papers_json.length; i++) {
+        papers.push(papers_json[i]["content"]);
+    }
     console.log("papers (length:", papers.length, ")", papers);
 
 //     insert clusters
     let clusters = [];
-    get_data_from_n4u(clusters_dataset_id)
-        .then(data => {
-            let clusters_json = JSON.parse(data)["dataitems"];
-            for (let i = 0; i < clusters_json.length; i++) {
-                clusters.push(clusters_json[i]["content"]);
-            }
-        });
+    let raw_cluster = await get_data_from_n4u(clusters_dataset_id)
+    let clusters_json = JSON.parse(raw_cluster)["dataitems"];
+    for (let i = 0; i < clusters_json.length; i++) {
+        clusters.push(clusters_json[i]["content"]);
+    }
     console.log("clusters (length:", clusters.length, ")" ,clusters);
 //     insert description
     let descriptions = []
