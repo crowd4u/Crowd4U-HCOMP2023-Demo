@@ -42,14 +42,12 @@ async function plot_report(){
     console.log("clusters (length:", clusters.length, ")" ,clusters);
 //     insert description
     let descriptions = []
-    get_data_from_n4u(description_dataset_id)
-        .then(data => {
-            let desc = JSON.parse(data)["dataitems"];
-            for (let i = 0; i < desc.length; i++) {
-                let desc = document.createElement("p");
-                descriptions.push(desc);
-            }
-        });
+    let raw_data = await get_data_from_n4u(description_dataset_id);
+    let desc = JSON.parse(raw_data)["dataitems"];
+    for (let i = 0; i < desc.length; i++) {
+        let desc = document.createElement("p");
+        descriptions.push(desc);
+
     console.log("descriptions (length:", descriptions.length, ")", descriptions);
 
     // compose html like below
