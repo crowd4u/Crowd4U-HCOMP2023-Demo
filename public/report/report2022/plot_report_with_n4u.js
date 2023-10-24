@@ -107,7 +107,7 @@ async function plot_report(){
                     paper.appendChild(paper_title);
 
                     let paper_author = document.createElement("span", {className: "paper-author"});
-                    paper_author.innerText = papers[k][3];
+                    paper_author.innerText = papers[k][2];
                     paper.appendChild(paper_author);
 
                     papers_html.appendChild(paper);
