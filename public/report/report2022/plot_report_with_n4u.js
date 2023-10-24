@@ -72,8 +72,17 @@ async function plot_report(){
     for (let i = 0; i < clusters.length; i++) {
         let cluster = document.createElement("div", {className: "cluster"});
         let cluster_name = clusters[i][0];
-        let desc = descriptions[i][1];
-        let papers_id_in_cluster = clusters[i];
+        // slice of clusters from 1 to end is cluster_paper_id_list
+        let cluster_paper_id_list = clusters[i].slice(1);
+        // find description which has the same cluster name
+        let desc = "";
+        for (let j = 0; j < descriptions.length; j++) {
+            if (descriptions[j][0] === cluster_name) {
+                desc = descriptions[j][1];
+                break;
+            }
+        }
+
         let cluster_name_tag = document.createElement("h2");
         cluster_name_tag.innerText = cluster_name;
         cluster.appendChild(cluster_name_tag);
@@ -81,27 +90,30 @@ async function plot_report(){
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
 
-        let papers = document.createElement("div", {className: "papes"});
-        for (let j = 0; j < papers_id_in_cluster.length; j++) {
-            if (j === papers[1]) {
-                let paper = document.createElement("div", {className: "paper"});
-                let paper_title = document.createElement("span", {className: "paper-title"});
-                let title = papers[1];
-                let doi = papers[4];
-                // title with a link to doi
-                let title_link = document.createElement("a", {href: doi});
-                title_link.innerText = title;
-                paper_title.appendChild(title_link);
-                paper.appendChild(paper_title);
+        let papers_html = document.createElement("div", {className: "papes"});
+        for (let j = 0; j < cluster_paper_id_list.length; j++) {
+            let paper_id = cluster_paper_id_list[j];
+            for (let k = 0; k < papers.length; k++) {
+                if (paper_id === papers[k][0]) {
+                    let paper = document.createElement("div", {className: "paper"});
+                    let paper_title = document.createElement("span", {className: "paper-title"});
+                    let title = papers[k][1];
+                    let doi = papers[k][2];
+                    // title with a link to doi
+                    let title_link = document.createElement("a", {href: doi});
+                    title_link.innerText = title;
+                    paper_title.appendChild(title_link);
+                    paper.appendChild(paper_title);
 
-                let paper_author = document.createElement("span", {className: "paper-author"});
-                paper_author.innerText = papers[2];
-                paper.appendChild(paper_author);
+                    let paper_author = document.createElement("span", {className: "paper-author"});
+                    paper_author.innerText = papers[k][3];
+                    paper.appendChild(paper_author);
 
-                papers.appendChild(paper);
+                    papers_html.appendChild(paper);
+                }
             }
         }
-        cluster.appendChild(papers);
+        cluster.appendChild(papers_html);
         console.log("cluster", cluster, "papers", papers);
         html.appendChild(cluster);
     }
