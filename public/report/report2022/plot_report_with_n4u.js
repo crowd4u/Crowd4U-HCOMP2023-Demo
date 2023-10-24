@@ -47,7 +47,7 @@ async function plot_report(){
     for (let i = 0; i < desc.length; i++) {
         let desc = document.createElement("p");
         descriptions.push(desc);
-
+    }
     console.log("descriptions (length:", descriptions.length, ")", descriptions);
 
     // compose html like below
@@ -110,5 +110,5 @@ async function plot_report(){
         html.appendChild(cluster);
     }
 
-    document.getElementById("showReport").style.display = "none"
+    document.getElementById("showReport").style.display = "none";
 }
