@@ -7,8 +7,8 @@ const papers_dataset_id = "b9933a81-717e-40d6-823f-b54602ccf651"
 const clusters_dataset_id = "0bbe7341-4bab-4b11-beae-565a2758e68c"
 const description_dataset_id = "be9fc012-90bd-462e-a60a-e756d5a55fb2"
 
-function get_data_from_n4u(dataset_id) {
-    return fetch(n4u_api_url+"/datasets/"+dataset_id)
+async function get_data_from_n4u(dataset_id) {
+    return await fetch(n4u_api_url+"/datasets/"+dataset_id)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok: '+response.status);
@@ -75,8 +75,8 @@ async function plot_report(){
         </div>
     </div>
      **/
-    let cluster = document.createElement("div", {className: "cluster"});
     for (let i = 0; i < clusters.length; i++) {
+        let cluster = document.createElement("div", {className: "cluster"});
         let cluster_name = clusters[i][0];
         let desc = descriptions[i][1];
         let papers_id_in_cluster = clusters[i];
@@ -108,8 +108,9 @@ async function plot_report(){
             }
         }
         cluster.appendChild(papers);
+        console.log("cluster", cluster, "papers", papers);
+        html.appendChild(cluster);
     }
-    html.appendChild(cluster);
 
     document.getElementById("showReport").style.display = "none"
 }
