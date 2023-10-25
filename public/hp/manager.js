@@ -109,7 +109,7 @@ function showNextItem() {
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        if (getCookie("use_dummy") === "on") {
+        if (getCookie("use_dummy") === "dummy") {
             plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "human_dataset_id");
@@ -120,7 +120,7 @@ function showNextItem() {
         let button = document.getElementById('logic_proceeding');
         button.style.display = 'none';
         let target_element = document.getElementById('fixed_results');
-        if (getCookie("use_dummy") === "on") {
+        if (getCookie("use_dummy") === "dummy") {
             plotTableFromN4UDatasetDummy(target_element, "result_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "result_dataset_id");
