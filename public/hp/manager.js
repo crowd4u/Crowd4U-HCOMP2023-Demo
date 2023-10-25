@@ -164,7 +164,7 @@ function plotInconsistentPairs(target_element, id_name = "") {
 function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     if (id_name === "human_dataset_id") {
         let dummy_data = "[\n" +
-            "                [None, True, False],\n" +
+            "                [None, False, True],\n" +
             "                [None, None, True],\n" +
             "                [None, None, None]\n" +
             "            ]";
