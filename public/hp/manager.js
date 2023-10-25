@@ -33,7 +33,10 @@ function updateSourceDatasetId() {
 }
 
 function updateUseDummy() {
-    const useDummy = document.getElementById('useDummy').value;
+    let useDummy = document.getElementById('useDummy').value;
+    if (useDummy === undefined) {
+        useDummy = "";
+    }
     setCookie('use_dummy', useDummy);  // Set the cookie named 'use_dummy' with the input value
     alert('Use Dummy updated!');
 }
@@ -104,12 +107,13 @@ function showNextItem() {
     list = Array.prototype.filter.call(list, function (item) {
         return item.style.display === 'none';
     });
+    let isdummy = getCookie("use_dummy");
     if (list.length > 0) {
         list[0].style.display = 'block';
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        if (getCookie("use_dummy") === "dummy") {
+        if (isdummy !== "") {
             plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "human_dataset_id");
@@ -120,7 +124,7 @@ function showNextItem() {
         let button = document.getElementById('logic_proceeding');
         button.style.display = 'none';
         let target_element = document.getElementById('fixed_results');
-        if (getCookie("use_dummy") === "dummy") {
+        if (isdummy !== "") {
             plotTableFromN4UDatasetDummy(target_element, "result_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "result_dataset_id");
