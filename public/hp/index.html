@@ -45,14 +45,17 @@
         <input type="text" id="n4uURL">
         <button onclick="updateN4UURL()">Update</button>
     </div>
+    <div>
+        <label for="flag_dummy">Dummy Mode:</label>
+        <input type="checkbox" id="flag_dummy" checked onchange="updateUseDummy()">
+    </div>
 </div>
 
 <div>
 <textarea id="rules" rows="10" cols="50" readonly>
 Movie("Harry Potter and the Philosopher's Stone");
 Movie("Harry Potter and the Chamber of Secrets");
-Movie("HP & PS");
-Movie("HP & CS");
+Movie("Harry Potter");
 Match(x, y) :- Movie(x) Movie(y), Same(x, y)/open;
 F :- Match(x, y), Match(y, z), [ not Match(x, z) ];
 </textarea>

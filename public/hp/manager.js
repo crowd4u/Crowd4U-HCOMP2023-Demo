@@ -32,6 +32,12 @@ function updateSourceDatasetId() {
     alert('Source Dataset ID updated!');
 }
 
+function updateUseDummy() {
+    const useDummy = document.getElementById('useDummy').value;
+    setCookie('use_dummy', useDummy);  // Set the cookie named 'use_dummy' with the input value
+    alert('Use Dummy updated!');
+}
+
 function updateHumanDatasetId() {
     const humanDatasetId = document.getElementById('humanDatasetId').value;
     setCookie('human_dataset_id', humanDatasetId);  // Set the cookie named 'human_dataset_id' with the input value
@@ -103,14 +109,22 @@ function showNextItem() {
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        plotTableFromN4UDataset(target_element, "human_dataset_id");
+        if (getCookie("use_dummy") === "on") {
+            plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
+        } else {
+            plotTableFromN4UDataset(target_element, "human_dataset_id");
+        }
         plotInconsistentPairs(target_element, "human_dataset_id")
     }
     if (list.length === 1) {
         let button = document.getElementById('logic_proceeding');
         button.style.display = 'none';
         let target_element = document.getElementById('fixed_results');
-        plotTableFromN4UDataset(target_element, "result_dataset_id");
+        if (getCookie("use_dummy") === "on") {
+            plotTableFromN4UDatasetDummy(target_element, "result_dataset_id");
+        } else {
+            plotTableFromN4UDataset(target_element, "result_dataset_id");
+        }
     }
 }
 
@@ -145,6 +159,57 @@ function plotInconsistentPairs(target_element, id_name = "") {
             html += "</ul>";
             target_element.innerHTML = html;
         });
+}
+
+function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
+    if (id_name === "human_dataset_id") {
+        let dummy_data = "[\n" +
+            "                [None, True, False],\n" +
+            "                [None, None, True],\n" +
+            "                [None, None, None]\n" +
+            "            ]";
+        const cleanedStr = dummy_data.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+        let result_list = JSON.parse(cleanedStr);
+        target_element.innerHTML = tableFromList(result_list);
+    } else if (id_name === "llm_dataset_id") {
+        let dummy_result = "[\n" +
+            "               [None, True, False],\n" +
+            "               [None, None, False],\n" +
+            "               [None, None, None],\n" +
+            "            ]";
+        const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+        let result_list = JSON.parse(cleanedStr);
+        target_element.innerHTML = tableFromList(result_list);
+    }
+}
+
+function tableFromList(data_list) {
+    let labels = getLabels();
+    let html = "<table>";
+    let first_row = "<tr><th>Titles</th>";
+    for (let i = 0; i < labels.length; i++) {
+        first_row += "<th style='font-weight: normal;'>" + labels[i] + "</th>";
+    }
+    first_row += "</tr>";
+    html += first_row;
+    for (let i = 0; i < data_list.length; i++) {
+        html += "<tr>";
+        html += "<td>" + labels[i] + "</td>";
+        for (let j = 0; j < data_list[i].length; j++) {
+            if (i < j) {
+                if (data_list[i][j] === true) {
+                    html += "<td>" + "Same" + "</td>";
+                } else {
+                    html += "<td>" + "Different" + "</td>";
+                }
+            } else {
+                html += "<td>-</td>";
+            }
+        }
+        html += "</tr>";
+    }
+    html += "</table>";
+    return html;
 }
 
 function plotTableFromN4UDataset(target_element, id_name = "") {
