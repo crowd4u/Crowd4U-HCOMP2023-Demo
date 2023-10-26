@@ -11,46 +11,44 @@ function getCookie(name) {
 function updateWorkflowId() {
     const workflowId = document.getElementById('workflowId').value;
     setCookie('workflow_id', workflowId);  // Set the cookie named 'workflow_id' with the input value
-    alert('Workflow ID updated!');
+    // alert('Workflow ID updated!');
 }
 
 function updateResultDatasetId() {
     const resultDatasetId = document.getElementById('resultDatasetId').value;
     setCookie('result_dataset_id', resultDatasetId);  // Set the cookie named 'result_dataset_id' with the input value
-    alert('Result Dataset ID updated!');
+    // alert('Result Dataset ID updated!');
 }
 
 function updateLLMResultDatasetId() {
     const resultDatasetId = document.getElementById('LLMResultDatasetId').value;
     setCookie('llm_dataset_id', resultDatasetId);  // Set the cookie named 'result_dataset_id' with the input value
-    alert('LLM Result Dataset ID updated!');
+    // alert('LLM Result Dataset ID updated!');
 }
 
 function updateSourceDatasetId() {
     const sourceDatasetId = document.getElementById('sourceDatasetId').value;
     setCookie('source_dataset_id', sourceDatasetId);  // Set the cookie named 'source_dataset_id' with the input value
-    alert('Source Dataset ID updated!');
+    // alert('Source Dataset ID updated!');
 }
 
 function updateUseDummy() {
     let useDummy = document.getElementById('useDummy').value;
-    if (useDummy === undefined) {
-        useDummy = "";
-    }
-    setCookie('use_dummy', useDummy);  // Set the cookie named 'use_dummy' with the input value
-    alert('Use Dummy updated!');
+    let dummyFlag = useDummy !== undefined;
+    setCookie('use_dummy', dummyFlag);  // Set the cookie named 'use_dummy' with the input value
+    // alert('Use Dummy updated!');
 }
 
 function updateHumanDatasetId() {
     const humanDatasetId = document.getElementById('humanDatasetId').value;
     setCookie('human_dataset_id', humanDatasetId);  // Set the cookie named 'human_dataset_id' with the input value
-    alert('Human Dataset ID updated!');
+    // alert('Human Dataset ID updated!');
 }
 
 function updateN4UURL() {
     const n4uURL = document.getElementById('n4uURL').value;
     setCookie('n4u_url', n4uURL);  // Set the cookie named 'n4u_url' with the input value
-    alert('N4U URL updated!');
+    // alert('N4U URL updated!');
 }
 
 function updateParamsByJSON() {
@@ -113,7 +111,7 @@ function showNextItem() {
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        if (isdummy !== "") {
+        if (isdummy) {
             plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "human_dataset_id");
@@ -124,7 +122,7 @@ function showNextItem() {
         let button = document.getElementById('logic_proceeding');
         button.style.display = 'none';
         let target_element = document.getElementById('fixed_results');
-        if (isdummy !== "") {
+        if (isdummy) {
             plotTableFromN4UDatasetDummy(target_element, "result_dataset_id");
         } else {
             plotTableFromN4UDataset(target_element, "result_dataset_id");
@@ -166,6 +164,7 @@ function plotInconsistentPairs(target_element, id_name = "") {
 }
 
 function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
+    console.log("plot tables with dummy data");
     if (id_name === "human_dataset_id") {
         let dummy_data = "[\n" +
             "                [None, False, True],\n" +
