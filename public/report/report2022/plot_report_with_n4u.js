@@ -19,6 +19,11 @@ async function get_data_from_n4u(dataset_id) {
 
 async function plot_report(){
     let html = document.getElementById("report");
+    // remove all children
+    while (html.firstChild) {
+        html.removeChild(html.firstChild);
+    }
+
     //     insert papers
     let papers = [];
     let papers_raw = await get_data_from_n4u(papers_dataset_id)
@@ -122,5 +127,4 @@ async function plot_report(){
         html.appendChild(cluster);
     }
 
-    document.getElementById("showReport").style.display = "none";
 }
