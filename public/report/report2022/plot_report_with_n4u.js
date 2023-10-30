@@ -119,6 +119,9 @@ async function plot_report(){
         let switcher = document.createElement("p");
         switcher.innerText = "Papers";
         switcher.className = "toggle-button";
+        switcher.addEventListener('click', () => {
+            papers_html.style.display = papers_html.style.display === 'block' ? 'none' : 'block';
+        });
         papers_container.appendChild(switcher);
         papers_container.appendChild(papers_html);
         cluster.appendChild(papers_container);
