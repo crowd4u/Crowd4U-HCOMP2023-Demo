@@ -116,8 +116,9 @@ async function plot_report(){
             }
         }
         papers_html.style.display = "none";
-        let switcher = document.createElement("p", {className: "toggle-button"});
+        let switcher = document.createElement("p");
         switcher.innerText = "Papers";
+        switcher.className = "toggle-button";
         papers_container.appendChild(switcher);
         papers_container.appendChild(papers_html);
         cluster.appendChild(papers_container);
