@@ -7,6 +7,19 @@ body {
     height: 100vh;
     margin: 0;
 }
+.report {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .cluster-container {
     display: flex;
     flex-direction: column;
@@ -38,6 +51,7 @@ body {
     margin-top: 10px;
 }
 .toggle-button {
+    display: block;
     cursor: pointer;
     color: #0074d9;
     text-align: center;
