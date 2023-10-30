@@ -56,7 +56,9 @@
 <div id="report"></div>
 
 <script src="plot_report_with_n4u.js" type="text/javascript">
-    document.addEventListener("DOMContentLoaded", plot_report);
+    document.addEventListener("DOMContentLoaded", () => {
+        plot_report();
+    });
 </script>
 
 </body>
