@@ -9,29 +9,20 @@ body {
 }
 .report {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+}
+.showreport {
+    display: block;
 }
 .cluster-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
+    width: calc(33.33% - 40px);
+    margin: 10px;
     background-color: #fff;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    position: relative;
 }
 .cluster {
     width: 100%;
