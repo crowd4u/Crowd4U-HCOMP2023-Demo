@@ -8,7 +8,7 @@ body {
     margin: 0;
 }
 .report {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     justify-content: center;
 }
