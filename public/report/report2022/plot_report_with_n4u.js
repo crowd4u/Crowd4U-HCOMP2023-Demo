@@ -94,8 +94,8 @@ async function plot_report(){
         let cluster_desc = document.createElement("p", {className: "article"});
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
-
-        let papers_html = document.createElement("div", {className: "references", style: "display: none"});
+        let papers_container = document.createElement("div", {className: "papers"});
+        let papers_html = document.createElement("div", {className: "references"});
         for (let j = 0; j < cluster_paper_id_list.length; j++) {
             let paper_id = cluster_paper_id_list[j];
             for (let k = 0; k < papers.length; k++) {
@@ -111,18 +111,15 @@ async function plot_report(){
                     paper_title.appendChild(title_link);
                     paper.appendChild(paper_title);
 
-                    // let paper_author = document.createElement("span", {className: "paper-author"});
-                    // paper_author.innerText = papers[k][2];
-                    // paper.appendChild(paper_author);
-
                     papers_html.appendChild(paper);
                 }
             }
         }
-        cluster.appendChild(papers_html);
+        papers_html.style.display = "none";
         let switcher = document.createElement("p", {className: "toggle-button"});
         switcher.innerText = "Papers";
-        cluster.appendChild(switcher);
+        papers_container.appendChild(switcher);
+        papers_container.appendChild(papers_html);
         console.log("cluster", cluster, "papers", papers);
         html.appendChild(cluster);
     }
