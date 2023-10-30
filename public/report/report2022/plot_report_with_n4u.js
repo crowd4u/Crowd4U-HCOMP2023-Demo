@@ -90,12 +90,12 @@ async function plot_report(){
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
 
-        let papers_html = document.createElement("div", {className: "references"});
+        let papers_html = document.createElement("div", {className: "references", style: "display: none"});
         for (let j = 0; j < cluster_paper_id_list.length; j++) {
             let paper_id = cluster_paper_id_list[j];
             for (let k = 0; k < papers.length; k++) {
                 if (paper_id === papers[k][0]) {
-                    let paper = document.createElement("div", {className: "references"});
+                    let paper = document.createElement("div", {className: "paper"});
                     let paper_title = document.createElement("span", {className: "paper-title"});
                     let title = papers[k][1];
                     let doi = papers[k][2];
@@ -116,7 +116,7 @@ async function plot_report(){
         }
         cluster.appendChild(papers_html);
         let switcher = document.createElement("p", {className: "toggle-button"});
-        switcher.innerText = "Show References";
+        switcher.innerText = "Papers";
         cluster.appendChild(switcher);
         console.log("cluster", cluster, "papers", papers);
         html.appendChild(cluster);

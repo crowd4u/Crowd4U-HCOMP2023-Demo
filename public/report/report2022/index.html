@@ -1,7 +1,15 @@
 <?doctype html>
 <html lang="en">
 <head>
-    <script src="plot_report_with_n4u.js" type="text/javascript"></script>
+    <script src="plot_report_with_n4u.js" type="text/javascript">
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const references = button.nextElementSibling;
+                references.style.display = references.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
     <title>Report of HCOMP | Crowd4U Demonstrations on HCOMP2022</title>
     <style>
         body {
@@ -54,7 +62,8 @@
 <body>
 <h2>HCOMP2022 Report</h2>
 
-<input type="button" onclick="plot_report()">
+<input type="button" onclick="plot_report()" id="show-button">
+<label for="show-button">Show Report</label>
 
 <div id="report"></div>
 
