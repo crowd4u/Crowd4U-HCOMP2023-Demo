@@ -75,7 +75,8 @@ async function plot_report(){
     </div>
      **/
     for (let i = 0; i < clusters.length; i++) {
-        let cluster = document.createElement("div", {className: "cluster-container"});
+        let cluster = document.createElement("div");
+        cluster.className = "cluster-container";
         let cluster_name = clusters[i][0];
         // slice of clusters from 1 to end is cluster_paper_id_list
         let cluster_paper_id_list = clusters[i].slice(1);
@@ -91,17 +92,22 @@ async function plot_report(){
         let cluster_name_tag = document.createElement("h2", {className: "cluster-name"});
         cluster_name_tag.innerText = cluster_name;
         cluster.appendChild(cluster_name_tag);
-        let cluster_desc = document.createElement("p", {className: "article"});
+        let cluster_desc = document.createElement("p");
+        cluster_desc.className = "cluster-description";
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
-        let papers_container = document.createElement("div", {className: "papers"});
-        let papers_html = document.createElement("div", {className: "references"});
+        let papers_container = document.createElement("div");
+        papers_container.className = "papers";
+        let papers_html = document.createElement("div");
+        papers_html.className = "references";
         for (let j = 0; j < cluster_paper_id_list.length; j++) {
             let paper_id = cluster_paper_id_list[j];
             for (let k = 0; k < papers.length; k++) {
                 if (paper_id === papers[k][0]) {
-                    let paper = document.createElement("div", {className: "paper"});
-                    let paper_title = document.createElement("span", {className: "paper-title"});
+                    let paper = document.createElement("div");
+                    paper.className = "paper";
+                    let paper_title = document.createElement("span");
+                    paper_title.className = "paper-title";
                     let title = papers[k][1];
                     let doi = papers[k][2];
                     // title with a link to doi
