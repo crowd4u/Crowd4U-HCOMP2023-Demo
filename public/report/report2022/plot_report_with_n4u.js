@@ -120,6 +120,7 @@ async function plot_report(){
         switcher.innerText = "Papers";
         papers_container.appendChild(switcher);
         papers_container.appendChild(papers_html);
+        cluster.appendChild(papers_container);
         console.log("cluster", cluster, "papers", papers);
         html.appendChild(cluster);
     }
