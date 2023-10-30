@@ -70,7 +70,7 @@ async function plot_report(){
     </div>
      **/
     for (let i = 0; i < clusters.length; i++) {
-        let cluster = document.createElement("div", {className: "cluster"});
+        let cluster = document.createElement("div", {className: "cluster-container"});
         let cluster_name = clusters[i][0];
         // slice of clusters from 1 to end is cluster_paper_id_list
         let cluster_paper_id_list = clusters[i].slice(1);
@@ -90,12 +90,12 @@ async function plot_report(){
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
 
-        let papers_html = document.createElement("div", {className: "papes"});
+        let papers_html = document.createElement("div", {className: "references"});
         for (let j = 0; j < cluster_paper_id_list.length; j++) {
             let paper_id = cluster_paper_id_list[j];
             for (let k = 0; k < papers.length; k++) {
                 if (paper_id === papers[k][0]) {
-                    let paper = document.createElement("div", {className: "paper"});
+                    let paper = document.createElement("div", {className: "references"});
                     let paper_title = document.createElement("span", {className: "paper-title"});
                     let title = papers[k][1];
                     let doi = papers[k][2];
@@ -106,15 +106,18 @@ async function plot_report(){
                     paper_title.appendChild(title_link);
                     paper.appendChild(paper_title);
 
-                    let paper_author = document.createElement("span", {className: "paper-author"});
-                    paper_author.innerText = papers[k][2];
-                    paper.appendChild(paper_author);
+                    // let paper_author = document.createElement("span", {className: "paper-author"});
+                    // paper_author.innerText = papers[k][2];
+                    // paper.appendChild(paper_author);
 
                     papers_html.appendChild(paper);
                 }
             }
         }
         cluster.appendChild(papers_html);
+        let switcher = document.createElement("p", {className: "toggle-button"});
+        switcher.innerText = "Show References";
+        cluster.appendChild(switcher);
         console.log("cluster", cluster, "papers", papers);
         html.appendChild(cluster);
     }
