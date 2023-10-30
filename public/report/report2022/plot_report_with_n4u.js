@@ -88,10 +88,10 @@ async function plot_report(){
             }
         }
 
-        let cluster_name_tag = document.createElement("h2");
+        let cluster_name_tag = document.createElement("h2", {className: "cluster-name"});
         cluster_name_tag.innerText = cluster_name;
         cluster.appendChild(cluster_name_tag);
-        let cluster_desc = document.createElement("p", {className: "cluster-description"});
+        let cluster_desc = document.createElement("p", {className: "article"});
         cluster_desc.innerText = desc;
         cluster.appendChild(cluster_desc);
 
