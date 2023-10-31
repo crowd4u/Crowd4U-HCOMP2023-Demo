@@ -164,7 +164,7 @@ function plotInconsistentPairs(target_element, id_name = "") {
         });
 }
 
-function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
+async function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     console.log("plot tables with dummy data");
     let dummy_result = "";
     if(id_name === "llm_dataset_id") {
@@ -176,7 +176,7 @@ function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
     console.log("cleaned dummy str:",cleanedStr);
     let result_list = JSON.parse(cleanedStr);
-    target_element.innerHTML = tableFromList(result_list);
+    target_element.innerHTML = await tableFromList(result_list);
 }
 
 async function tableFromList(data_list) {
