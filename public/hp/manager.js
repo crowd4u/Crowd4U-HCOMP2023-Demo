@@ -124,8 +124,8 @@ function showNextItem() {
         plotInconsistentPairs(target_element, "human_dataset_id")
     }
     if (list.length === 1) {
-        let button = document.getElementById('logic_proceeding');
-        button.style.display = 'none';
+        // let button = document.getElementById('logic_proceeding');
+        // button.style.display = 'none';
         let target_element = document.getElementById('fixed_results');
         plotTableFromN4UDataset(target_element, "result_dataset_id");
     }
@@ -247,6 +247,7 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
             first_row += "</tr>";
             html += first_row;
             let result_raw = results[0]["content"][0];
+            console.log("result_raw:", result_raw);
             const cleanedStr = result_raw.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
             let result_list = JSON.parse(cleanedStr);
             for (let i = 0; i < result_list.length; i++) {
