@@ -167,17 +167,12 @@ function plotInconsistentPairs(target_element, id_name = "") {
 function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     console.log("plot tables with dummy data");
     let dummy_result = "";
-    switch (id_name) {
-        case "human_dataset_id": {
-            dummy_result = "[[None, False, True],[None, None, True],[None, None, None]]";
-            break;
-        }
-        case "result_dataset_id": {
-            dummy_result = "[[None, False, True],[None, None, False],[None, None, None]]";
-            break;
-        }
+    if(id_name === "human_dataset_id") {
+        dummy_result = "[[None, False, True],[None, None, True],[None, None, None]]";
     }
-
+    if(id_name === "result_dataset_id") {
+        dummy_result = "[[None, False, True],[None, None, False],[None, None, None]]";
+    }
     const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
     console.log("cleaned dummy str:",cleanedStr);
     let result_list = JSON.parse(cleanedStr);
