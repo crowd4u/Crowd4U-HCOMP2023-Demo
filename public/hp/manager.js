@@ -95,7 +95,11 @@ function showHiddenItem() {
     hiddenItem.style.display = 'block';
 
     let target_element = document.getElementById('llm_results');
-    plotTableFromN4UDataset(target_element, "llm_dataset_id");
+    if (getCookie("use_dummy")) {
+        plotTableFromN4UDatasetDummy(target_element, "llm_dataset_id");
+    } else {
+        plotTableFromN4UDataset(target_element, "llm_dataset_id");
+    }
 }
 
 // showing list items one by one with clicking the button
@@ -112,11 +116,11 @@ function showNextItem() {
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        if (isdummy) {
-            plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
-        } else {
-            plotTableFromN4UDataset(target_element, "human_dataset_id");
-        }
+        // if (isdummy) {
+        //     plotTableFromN4UDatasetDummy(target_element, "human_dataset_id");
+        // } else {
+        //     plotTableFromN4UDataset(target_element, "human_dataset_id");
+        // }
         plotInconsistentPairs(target_element, "human_dataset_id")
     }
     if (list.length === 1) {
@@ -166,24 +170,29 @@ function plotInconsistentPairs(target_element, id_name = "") {
 
 function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     console.log("plot tables with dummy data");
-    if (id_name === "human_dataset_id") {
-        let dummy_data = "[\n" +
-            "                [None, False, True],\n" +
-            "                [None, None, True],\n" +
-            "                [None, None, None]\n" +
-            "            ]";
-        const cleanedStr = dummy_data.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
-        let result_list = JSON.parse(cleanedStr);
-        target_element.innerHTML = tableFromList(result_list);
-    } else if (id_name === "llm_dataset_id") {
-        let dummy_result = "[\n" +
-            "               [None, True, False],\n" +
-            "               [None, None, False],\n" +
-            "               [None, None, None],\n" +
-            "            ]";
-        const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
-        let result_list = JSON.parse(cleanedStr);
-        target_element.innerHTML = tableFromList(result_list);
+    switch (id_name) {
+        case "llm_daaset_id": {
+            let dummy_result = "[\n" +
+                "               [None, False, True],\n" +
+                "               [None, None, True],\n" +
+                "               [None, None, None],\n" +
+                "            ]";
+            const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+            let result_list = JSON.parse(cleanedStr);
+            target_element.innerHTML = tableFromList(result_list);
+            break;
+        }
+        case "result_dataset_id": {
+            let dummy_result = "[\n" +
+                "               [None, False, True],\n" +
+                "               [None, None, False],\n" +
+                "               [None, None, None],\n" +
+                "            ]";
+            const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+            let result_list = JSON.parse(cleanedStr);
+            target_element.innerHTML = tableFromList(result_list);
+            break;
+        }
     }
 }
 
@@ -284,7 +293,7 @@ function getLabels() {
             console.log('Source Data received:', data);
             let results = data["dataitems"];
             for (let i = 0; i < results.length; i++) {
-                label_list.push(results[i]["content"][0]);
+                label_list.unshift(results[i]["content"][0]);
             }
         });
     return label_list;
