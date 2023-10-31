@@ -176,10 +176,10 @@ async function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
     console.log("cleaned dummy str:",cleanedStr);
     let result_list = JSON.parse(cleanedStr);
-    tableFromList(target_element, result_list);
+    plotResultFromList(target_element, result_list);
 }
 
-async function tableFromList(target_element, data_list) {
+function tableFromList(target_element, data_list) {
     getLabels()
         .then(labels => {
             let html = "<table>";
@@ -201,6 +201,36 @@ async function tableFromList(target_element, data_list) {
                         }
                     } else {
                         html += "<td>-</td>";
+                    }
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+            target_element.innerHTML = html;
+        });
+}
+
+function plotResultFromList(target_element, data_list) {
+    getLabels()
+        .then(labels => {
+            let html = "<table>";
+            let first_row = "<tr>";
+            first_row += "<th style='font-weight: normal;'>a</th>";
+            first_row += "<th style='font-weight: normal;'>b</th>";
+            first_row += "<th style='font-weight: normal;'></th>";
+            first_row += "</tr>";
+
+            html += first_row;
+            for (let i = 0; i < data_list.length; i++) {
+                html += "<tr>";
+                for (let j = 0; j < data_list[i].length; j++) {
+                    if (i < j) {
+                        html += "<td>"+labels[i]+"</td><td>"+labels[j]+"</td>;"
+                        if (data_list[i][j] === true) {
+                            html += "<td>" + "Same" + "</td>";
+                        } else {
+                            html += "<td>" + "Different" + "</td>";
+                        }
                     }
                 }
                 html += "</tr>";
