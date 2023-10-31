@@ -38,7 +38,7 @@ body {
 }
 .references {
     display: none;
-    align-items: baseline;
+    text-align: left;
     margin-top: 10px;
 }
 .toggle-button {
