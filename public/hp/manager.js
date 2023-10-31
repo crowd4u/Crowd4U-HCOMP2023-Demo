@@ -95,11 +95,11 @@ function showHiddenItem() {
     hiddenItem.style.display = 'block';
 
     let target_element = document.getElementById('llm_results');
-    // if (getCookie("use_dummy")) {
-    //     plotTableFromN4UDatasetDummy(target_element, "llm_dataset_id");
-    // } else {
-    //     plotTableFromN4UDataset(target_element, "llm_dataset_id");
-    // }
+    if (getCookie("use_dummy")) {
+        plotTableFromN4UDatasetDummy(target_element, "llm_dataset_id");
+    } else {
+        plotTableFromN4UDataset(target_element, "llm_dataset_id");
+    }
 }
 
 // showing list items one by one with clicking the button
@@ -116,11 +116,11 @@ function showNextItem() {
     }
     if (list.length === 3) {
         let target_element = document.getElementById('inconsistent_pairs');
-        if (isdummy) {
-            plotTableFromN4UDatasetDummy(target_element, "llm_dataset_id");
-        } else {
-            plotTableFromN4UDataset(target_element, "llm_dataset_id");
-        }
+        // if (isdummy) {
+        //     plotTableFromN4UDatasetDummy(target_element, "llm_dataset_id");
+        // } else {
+        //     plotTableFromN4UDataset(target_element, "llm_dataset_id");
+        // }
         plotInconsistentPairs(target_element, "human_dataset_id")
     }
     if (list.length === 1) {
