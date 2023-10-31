@@ -283,7 +283,7 @@ function getLabels() {
             console.log('Source Data received:', data);
             let results = data["dataitems"];
             for (let i = 0; i < results.length; i++) {
-                label_list.unshift(results[i]["content"][0]);
+                label_list.push(results[i]["content"][0]);
             }
         });
     return label_list;
