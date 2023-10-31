@@ -176,36 +176,38 @@ async function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
     console.log("cleaned dummy str:",cleanedStr);
     let result_list = JSON.parse(cleanedStr);
-    target_element.innerHTML = await tableFromList(result_list);
+    tableFromList(target_element, result_list);
 }
 
-async function tableFromList(data_list) {
-    let labels = await getLabels();
-    let html = "<table>";
-    let first_row = "<tr><th>Titles</th>";
-    for (let i = 0; i < labels.length; i++) {
-        first_row += "<th style='font-weight: normal;'>" + labels[i] + "</th>";
-    }
-    first_row += "</tr>";
-    html += first_row;
-    for (let i = 0; i < data_list.length; i++) {
-        html += "<tr>";
-        html += "<td>" + labels[i] + "</td>";
-        for (let j = 0; j < data_list[i].length; j++) {
-            if (i < j) {
-                if (data_list[i][j] === true) {
-                    html += "<td>" + "Same" + "</td>";
-                } else {
-                    html += "<td>" + "Different" + "</td>";
-                }
-            } else {
-                html += "<td>-</td>";
+async function tableFromList(target_element, data_list) {
+    getLabels()
+        .then(labels => {
+            let html = "<table>";
+            let first_row = "<tr><th>Titles</th>";
+            for (let i = 0; i < labels.length; i++) {
+                first_row += "<th style='font-weight: normal;'>" + labels[i] + "</th>";
             }
-        }
-        html += "</tr>";
-    }
-    html += "</table>";
-    return html;
+            first_row += "</tr>";
+            html += first_row;
+            for (let i = 0; i < data_list.length; i++) {
+                html += "<tr>";
+                html += "<td>" + labels[i] + "</td>";
+                for (let j = 0; j < data_list[i].length; j++) {
+                    if (i < j) {
+                        if (data_list[i][j] === true) {
+                            html += "<td>" + "Same" + "</td>";
+                        } else {
+                            html += "<td>" + "Different" + "</td>";
+                        }
+                    } else {
+                        html += "<td>-</td>";
+                    }
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+            target_element.innerHTML = html;
+        });
 }
 
 function plotTableFromN4UDataset(target_element, id_name = "") {
