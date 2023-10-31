@@ -265,12 +265,14 @@ async function getLabels() {
     let source_dataset_id = getCookie("source_dataset_id");
     const baseurl = n4u_url+"api/v1/datasets/";
     let label_list = [];
-    let response = await fetch(baseurl+source_dataset_id);
-    if (!response.ok) {
-        throw new Error('Network response was not ok: '+response.status);
-    }
-    let data = response.json();
-    data = JSON.parse(data);
+    let rawdata = await fetch(baseurl+source_dataset_id)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.json()
+        });
+    let data = JSON.parse(rawdata);
     console.log('Source Data received:', data);
     let results = data["dataitems"];
     for (let i = 0; i < results.length; i++) {
