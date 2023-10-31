@@ -38,6 +38,7 @@ body {
 }
 .references {
     display: none;
+    align-items: baseline;
     margin-top: 10px;
 }
 .toggle-button {
