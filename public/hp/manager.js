@@ -179,6 +179,7 @@ function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     }
 
     const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+    console.log("cleaned dummy str:",cleanedStr);
     let result_list = JSON.parse(cleanedStr);
     target_element.innerHTML = tableFromList(result_list);
 }
