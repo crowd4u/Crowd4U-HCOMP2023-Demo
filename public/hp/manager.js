@@ -259,13 +259,13 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
         });
 }
 
-function getLabels() {
+async function getLabels() {
     const n4u_url = getCookie("n4u_url");
 
     let source_dataset_id = getCookie("source_dataset_id");
     const baseurl = n4u_url+"api/v1/datasets/";
     let label_list = [];
-    let response = fetch(baseurl+source_dataset_id)
+    let response = await fetch(baseurl+source_dataset_id);
     if (!response.ok) {
         throw new Error('Network response was not ok: '+response.status);
     }
