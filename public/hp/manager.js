@@ -179,8 +179,8 @@ function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     target_element.innerHTML = tableFromList(result_list);
 }
 
-function tableFromList(data_list) {
-    let labels = getLabels();
+async function tableFromList(data_list) {
+    let labels = await getLabels();
     let html = "<table>";
     let first_row = "<tr><th>Titles</th>";
     for (let i = 0; i < labels.length; i++) {
