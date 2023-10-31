@@ -273,10 +273,11 @@ async function getLabels() {
             return response.json()
         });
     let data = JSON.parse(rawdata);
-    console.log('Source Data received:', data);
+    console.log('Source Data for labels received:', data);
     let results = data["dataitems"];
     for (let i = 0; i < results.length; i++) {
-        label_list.unshift(results[i]["content"][0]);
+        console.log("label:", results[i]["content"][0]);
+        label_list = label_list.unshift(results[i]["content"][0]);
     }
     return label_list;
 }
