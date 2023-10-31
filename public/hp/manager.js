@@ -166,30 +166,29 @@ function plotInconsistentPairs(target_element, id_name = "") {
 
 function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     console.log("plot tables with dummy data");
+    let dummy_result = "";
     switch (id_name) {
-        case "llm_daaset_id": {
-            let dummy_result = "[\n" +
+        case "human_dataset_id": {
+            dummy_result = "[\n" +
                 "               [None, False, True],\n" +
                 "               [None, None, True],\n" +
                 "               [None, None, None],\n" +
                 "            ]";
-            const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
-            let result_list = JSON.parse(cleanedStr);
-            target_element.innerHTML = tableFromList(result_list);
             break;
         }
         case "result_dataset_id": {
-            let dummy_result = "[\n" +
+            dummy_result = "[\n" +
                 "               [None, False, True],\n" +
                 "               [None, None, False],\n" +
                 "               [None, None, None],\n" +
                 "            ]";
-            const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
-            let result_list = JSON.parse(cleanedStr);
-            target_element.innerHTML = tableFromList(result_list);
             break;
         }
     }
+
+    const cleanedStr = dummy_result.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+    let result_list = JSON.parse(cleanedStr);
+    target_element.innerHTML = tableFromList(result_list);
 }
 
 function tableFromList(data_list) {
