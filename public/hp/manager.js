@@ -169,19 +169,11 @@ function plotTableFromN4UDatasetDummy(target_element, id_name = "") {
     let dummy_result = "";
     switch (id_name) {
         case "human_dataset_id": {
-            dummy_result = "[\n" +
-                "               [None, False, True],\n" +
-                "               [None, None, True],\n" +
-                "               [None, None, None],\n" +
-                "            ]";
+            dummy_result = "[[None, False, True],[None, None, True],[None, None, None]]";
             break;
         }
         case "result_dataset_id": {
-            dummy_result = "[\n" +
-                "               [None, False, True],\n" +
-                "               [None, None, False],\n" +
-                "               [None, None, None],\n" +
-                "            ]";
+            dummy_result = "[[None, False, True],[None, None, False],[None, None, None]]";
             break;
         }
     }
