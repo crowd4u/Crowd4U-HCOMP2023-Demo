@@ -106,6 +106,7 @@ function showNextItem() {
         return item.style.display === 'none';
     });
     let isdummy = getCookie("use_dummy");
+    console.log("dummy_flag:", isdummy);
     if (list.length > 0) {
         list[0].style.display = 'block';
     }
