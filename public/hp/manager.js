@@ -215,50 +215,54 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
 
     let result_dataset_id = getCookie(id_name);
     target_element.innerHTML = "Loading...";
-    let label_list = getLabels();
     // get the fixed results form n4u API
     const baseurl = n4u_url+"api/v1/datasets/";
-    fetch(baseurl+result_dataset_id)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: '+response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            data = JSON.parse(data);
-            console.log('Data received:', data);
-            let results = data["dataitems"];
-            let html = "<table>";
-            let first_row = "<tr><th>Titles</th>";
-            for (let i = 0; i < label_list.length; i++) {
-                first_row += "<th style='font-weight: normal;'>" + label_list[i] + "</th>";
-            }
-            first_row += "</tr>";
-            html += first_row;
-            let result_raw = results[0]["content"][0];
-            console.log("result_raw:", result_raw);
-            const cleanedStr = result_raw.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
-            let result_list = JSON.parse(cleanedStr);
-            for (let i = 0; i < result_list.length; i++) {
-                html += "<tr>";
-                html += "<td>" + label_list[i] + "</td>";
-                for (let j = 0; j < result_list[i].length; j++) {
-                    if (i < j) {
-                        if (result_list[i][j] === true) {
-                            html += "<td>" + "Same" + "</td>";
-                        } else {
-                            html += "<td>" + "Different" + "</td>";
-                        }
-                    } else {
-                        html += "<td>-</td>";
+
+    getLabels()
+        .then(label_list => {
+            fetch(baseurl+result_dataset_id)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: '+response.status);
                     }
-                }
-                html += "</tr>";
-            }
-            html += "</table>";
-            target_element.innerHTML = html;
+                    return response.json();
+                })
+                .then(data => {
+                    data = JSON.parse(data);
+                    console.log('Data received:', data);
+                    let results = data["dataitems"];
+                    let html = "<table>";
+                    let first_row = "<tr><th>Titles</th>";
+                    for (let i = 0; i < label_list.length; i++) {
+                        first_row += "<th style='font-weight: normal;'>" + label_list[i] + "</th>";
+                    }
+                    first_row += "</tr>";
+                    html += first_row;
+                    let result_raw = results[0]["content"][0];
+                    console.log("result_raw:", result_raw);
+                    const cleanedStr = result_raw.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
+                    let result_list = JSON.parse(cleanedStr);
+                    for (let i = 0; i < result_list.length; i++) {
+                        html += "<tr>";
+                        html += "<td>" + label_list[i] + "</td>";
+                        for (let j = 0; j < result_list[i].length; j++) {
+                            if (i < j) {
+                                if (result_list[i][j] === true) {
+                                    html += "<td>" + "Same" + "</td>";
+                                } else {
+                                    html += "<td>" + "Different" + "</td>";
+                                }
+                            } else {
+                                html += "<td>-</td>";
+                            }
+                        }
+                        html += "</tr>";
+                    }
+                    html += "</table>";
+                    target_element.innerHTML = html;
+                });
         });
+
 }
 
 async function getLabels() {
