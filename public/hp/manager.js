@@ -222,8 +222,8 @@ function plotResultFromList(target_element, data_list) {
 
             html += first_row;
             for (let i = 0; i < data_list.length; i++) {
-                html += "<tr>";
                 for (let j = 0; j < data_list[i].length; j++) {
+                    html += "<tr>";
                     if (i < j) {
                         html += "<td>"+labels[i]+"</td><td>"+labels[j]+"</td>;"
                         if (data_list[i][j] === true) {
@@ -232,8 +232,8 @@ function plotResultFromList(target_element, data_list) {
                             html += "<td>" + "Different" + "</td>";
                         }
                     }
+                    html += "</tr>";
                 }
-                html += "</tr>";
             }
             html += "</table>";
             target_element.innerHTML = html;
@@ -262,33 +262,32 @@ function plotTableFromN4UDataset(target_element, id_name = "") {
                     console.log('Data received:', data);
                     let results = data["dataitems"];
                     let html = "<table>";
-                    let first_row = "<tr><th>Titles</th>";
-                    for (let i = 0; i < label_list.length; i++) {
-                        first_row += "<th style='font-weight: normal;'>" + label_list[i] + "</th>";
-                    }
+                    let first_row = "<tr>";
+                    first_row += "<th style='font-weight: normal;'>a</th>";
+                    first_row += "<th style='font-weight: normal;'>b</th>";
+                    first_row += "<th style='font-weight: normal;'></th>";
                     first_row += "</tr>";
+
                     html += first_row;
                     let result_raw = results[0]["content"][0];
                     console.log("result_raw:", result_raw);
                     const cleanedStr = result_raw.replace(/None/g, 'null').replace(/True/g, 'true').replace(/False/g, 'false');
                     let result_list = JSON.parse(cleanedStr);
                     for (let i = 0; i < result_list.length; i++) {
-                        html += "<tr>";
-                        html += "<td>" + label_list[i] + "</td>";
                         for (let j = 0; j < result_list[i].length; j++) {
-                            if (i < j) {
-                                if (result_list[i][j] === true) {
-                                    html += "<td>" + "Same" + "</td>";
-                                } else {
-                                    html += "<td>" + "Different" + "</td>";
+                            html += "<tr>";
+                                if (i < j) {
+                                    html += "<td>"+label_list[i]+"</td><td>"+label_list[j]+"</td>;"
+                                    if (result_list[i][j] === true) {
+                                        html += "<td>" + "Same" + "</td>";
+                                    } else {
+                                        html += "<td>" + "Different" + "</td>";
+                                    }
                                 }
-                            } else {
-                                html += "<td>-</td>";
+                                html += "</tr>";
                             }
                         }
-                        html += "</tr>";
-                    }
-                    html += "</table>";
+                        html += "</table>";
                     target_element.innerHTML = html;
                 });
         });
