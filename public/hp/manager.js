@@ -280,6 +280,7 @@ async function getLabels() {
         console.log("label:", label);
         label_list.unshift(label);
     }
+    console.log("label_list", label_list);
     return label_list;
 }
 
