@@ -109,7 +109,7 @@ async function plot_report(){
                     let paper_title = document.createElement("li");
                     paper_title.className = "paper-title";
                     let title = papers[k][1];
-                    let doi = papers[k][2];
+                    let doi = papers[k][4];
                     // title with a link to doi
                     let title_link = document.createElement("a");
                     title_link.innerText = title;
