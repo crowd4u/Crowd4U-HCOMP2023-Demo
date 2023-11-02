@@ -36,11 +36,15 @@ body {
     left: 0;
     background-color: #fff;
 }
+
+.papers {
+    background-color: aliceblue;
+}
+
 .references {
     display: none;
     text-align: left;
     margin-top: 10px;
-    background-color: aliceblue;
 }
 .toggle-button {
     display: block;
@@ -48,5 +52,4 @@ body {
     color: #0074d9;
     text-align: center;
     margin-top: 10px;
-    background-color: aliceblue;
 }
